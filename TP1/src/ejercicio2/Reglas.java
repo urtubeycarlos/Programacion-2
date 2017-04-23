@@ -35,7 +35,7 @@ public class Reglas {
 	 * @param elem1 El primer elemento de la jugaada
 	 * @param elem2 El segundo elemento de la jugada
 	 * @return Integer. 0 si la regla no esta definida, 1 si gano el elemento 1, 2 si gano el elemento 2.
-	 * @throws IllegalArgumentException Si el elemento 1 no se encuentra en la lista de reglas.
+	 * @throws IllegalArgumentException Si alguno de los elementos no se encuentra en la lista de reglas.
 	 */
 	public Integer checkearRegla(String elem1, String elem2){
 		checkearElemento(elem1, "checkear una regla");
