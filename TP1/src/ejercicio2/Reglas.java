@@ -24,6 +24,7 @@ public class Reglas {
 	 * @param ganador El nombre del elemento que va a ganar cuando se checkee esta regla.
 	 * @param perdedor El nombre del elemento que va a perder cuando se checkee esta regla
 	 * @return true si se agrego la regla correctamente, false si no se la pudo agregar.
+	 * @throws IllegalArgumentException Si alguno de los elementos no se encuentra en el map de reglas.
 	 */
 	public boolean agregarRegla(String ganador, String perdedor){
 		checkearElemento(ganador, "agregar una regla");
@@ -35,7 +36,7 @@ public class Reglas {
 	 * @param elem1 El primer elemento de la jugaada
 	 * @param elem2 El segundo elemento de la jugada
 	 * @return Integer. 0 si la regla no esta definida, 1 si gano el elemento 1, 2 si gano el elemento 2.
-	 * @throws IllegalArgumentException Si alguno de los elementos no se encuentra en la lista de reglas.
+	 * @throws IllegalArgumentException Si alguno de los elementos no se encuentra en el map de reglas.
 	 */
 	public Integer checkearRegla(String elem1, String elem2){
 		checkearElemento(elem1, "checkear una regla");
