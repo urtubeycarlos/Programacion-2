@@ -7,10 +7,15 @@ import org.junit.Test;
 public class JuegoTest {
 	
 	Juego juego;
-	
+
 	@Before
 	public void iniciar(){
 		juego = new Juego();
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void jugarVacio(){
+		juego.jugar("Tijera", "Papel");
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
