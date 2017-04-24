@@ -5,18 +5,52 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class JuegoTest {
-
+	
 	Juego juego;
 	
 	@Before
-	public void initialize(){
+	public void iniciar(){
 		juego = new Juego();
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testReglaIguales(){
+		
 		juego.agregarElemento("Piedra");
 		juego.agregarRegla("Piedra", "Piedra");
+		
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testReglaElemInexistente(){
+		
+		juego.agregarElemento("Piedra");
+		juego.agregarRegla("Tijera", "Piedra");
+
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testReglasRedundantes(){
+	
+		juego.agregarElemento("Papel");
+		juego.agregarElemento("Tijera");
+		
+		juego.agregarRegla("Papel", "Tijera");
+		juego.agregarRegla("Tijera", "Papel");
+		
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testReglasIndefinidas(){
+		
+		juego.agregarElemento("Piedra");
+		juego.agregarElemento("Papel");
+		juego.agregarElemento("Tijera");
+		
+		juego.agregarRegla("Piedra", "Tijera");
+		juego.agregarRegla("Tijera", "Papel");
+		
+		juego.jugar("Tijera", "Papel");
 	}
 	
 	@Test
