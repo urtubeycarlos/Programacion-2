@@ -26,18 +26,14 @@ public class JuegoTest {
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testReglaIguales(){
-		
 		juego.agregarElemento("Piedra");
 		juego.agregarRegla("Piedra", "Piedra");
-		
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testReglaElemInexistente(){
-		
 		juego.agregarElemento("Piedra");
 		juego.agregarRegla("Tijera", "Piedra");
-
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
@@ -53,7 +49,7 @@ public class JuegoTest {
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testReglasIndefinidas(){
-		
+
 		juego.agregarElemento("Piedra");
 		juego.agregarElemento("Papel");
 		juego.agregarElemento("Tijera");
@@ -62,6 +58,7 @@ public class JuegoTest {
 		juego.agregarRegla("Tijera", "Papel");
 		
 		juego.jugar("Tijera", "Papel");
+		
 	}
 	
 	@Test
