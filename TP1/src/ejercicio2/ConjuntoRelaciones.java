@@ -36,7 +36,7 @@ public class ConjuntoRelaciones {
 	/**
 	 * @param elem1 El primer elemento de la jugaada
 	 * @param elem2 El segundo elemento de la jugada
-	 * @return Integer. 0 si la regla no esta definida, 1 si elem1 tiene como subordinado al 2, 2 si elem2 tiene como subordinado al 1.
+	 * @return Integer. 0 si la relacion no esta definida, 1 si elem1 tiene como subordinado al 2, 2 si elem2 tiene como subordinado al 1.
 	 * @throws IllegalArgumentException Si alguno de los elementos no se encuentra en el map de reglas.
 	 */
 	public Integer checkearRelacion(String elem1, String elem2){
