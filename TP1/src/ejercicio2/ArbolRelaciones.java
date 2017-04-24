@@ -4,10 +4,25 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * @author Carlos Urtubey
+ */
 public class ArbolRelaciones {
 
 	HashMap<String, HashSet<String>> _relaciones;
-	// HashMap<"le gana a...", HashSet<"...estos">>
+
+	/**
+	 * Representa un arbol de relaciones entre distintas entidades o elementos representados por un String.<br/>
+	 * Un Arbol de Relaciones sigue la siguiente invariante:<br/>
+	 *   -> Antes de agregar una relacion se debe agregar ambas entidades o elementos que van a formar parte de
+	 *   	esa relacion.<br/>
+	 *   -> La transitividad es valida, es decir, una elemento o entidad puede "relacionarse consigo mismo".<br/>
+	 *   -> Las relaciones son asimetricas, es decir, el subordinado Y del elemento X no puede ser a la vez 
+	 *      subordinante de X debido a que se sigue un rango jerarquico con estructura de arbol.<br/>
+	 * 	 -> Un elemento X puede tener un conjunto vacio de relaciones. Debido a que se sigue una estructura de arbol
+	 *      un elemento podria ser una "rama" y no tener ningun subordinado pero si subordinante.
+	 * 
+	 */
 	
 	public ArbolRelaciones(){
 		_relaciones = new HashMap<String, HashSet<String>>();
@@ -22,10 +37,9 @@ public class ArbolRelaciones {
 	}
 	
 	/**
-	 * @param subordinante El nombre del elemento que va a ganar cuando se checkee esta regla.
-	 * @param subordinado El nombre del elemento que va a perder cuando se checkee esta regla
-	 * @return true si se agrego la regla correctamente, false si no se la pudo agregar.
-	 * @throws IllegalArgumentException Si alguno de los elementos no se encuentra en el map de reglas.
+	 * @param subordinante El nombre del elemento que va a ser el subordinante.
+	 * @param subordinado El nombre del elemento que va a ser el subordinado.
+	 * @throws IllegalArgumentException Si alguno de los elementos no se encuentra en el map de elementos para establer relacion.
 	 */
 	public void agregarRelacion(String subordinante, String subordinado){
 		checkearElemento(subordinante, "agregar una relacion");
@@ -35,8 +49,8 @@ public class ArbolRelaciones {
 	}
 	
 	/**
-	 * @param elem1 El primer elemento de la jugaada
-	 * @param elem2 El segundo elemento de la jugada
+	 * @param elem1 El primer elemento sobre el cual se checkeara la relacion.
+	 * @param elem2 El segundo elemento sobre el cual se checkeara la relacion.
 	 * @return Integer. 0 si la relacion no esta definida, 1 si elem1 tiene como subordinado al 2, 2 si elem2 tiene como subordinado al 1.
 	 * @throws IllegalArgumentException Si alguno de los elementos no se encuentra en el map de reglas.
 	 */
@@ -59,15 +73,26 @@ public class ArbolRelaciones {
 			throw new IllegalArgumentException("No se puede " + accion + " sin agregar el elemento '" + elem + "' primero");
 	}
 	
+	/**
+	 * @param subordinante El elemento subordinante en la relacion.
+	 * @param subordinado El elemento subordinado en la relacion.
+	 */
 	private void checkearRedundancias(String subordinante, String subordinado){
 		if( getSubordinados(subordinado).contains(subordinante) )
 			throw new IllegalArgumentException("No se admite definir relaciones redundantes: " + subordinante + " <-> " + subordinado);
 	}
 	
+	/**
+	 * @param elem El elemento del cual se van a obtener los subordinados.
+	 * @return Set<String> Conjunto de elementos subordinados.
+	 */
 	public Set<String> getSubordinados(String elem){
 		return _relaciones.get(elem);
 	}
 	
+	/**
+	 * @return Set<String> Conjunto de elementos en el arbol de relaciones.
+	 */
 	public Set<String> getElementos(){
 		return _relaciones.keySet();
 	}
