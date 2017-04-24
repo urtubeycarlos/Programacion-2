@@ -30,15 +30,14 @@ public class ArbolRelaciones {
 	
 	/**
 	 * @param elemento Nombre del nuevo elemento que se va a agregar
-	 * @return boolean true si puedo agregar correctamente, caso contrario false.
 	 */
 	public void agregarElemento(String elemento){
 		_relaciones.putIfAbsent(elemento, new HashSet<String>());
 	}
 	
 	/**
-	 * @param subordinante El nombre del elemento que va a ser el subordinante.
-	 * @param subordinado El nombre del elemento que va a ser el subordinado.
+	 * @param subordinante El nombre del elemento que va a ser el subordinante.<br/>
+	 * @param subordinado El nombre del elemento que va a ser el subordinado.<br/>
 	 * @throws IllegalArgumentException Si alguno de los elementos no se encuentra en el map de elementos para establer relacion.
 	 */
 	public void agregarRelacion(String subordinante, String subordinado){
@@ -49,9 +48,9 @@ public class ArbolRelaciones {
 	}
 	
 	/**
-	 * @param elem1 El primer elemento sobre el cual se checkeara la relacion.
-	 * @param elem2 El segundo elemento sobre el cual se checkeara la relacion.
-	 * @return Integer. 0 si la relacion no esta definida, 1 si elem1 tiene como subordinado al 2, 2 si elem2 tiene como subordinado al 1.
+	 * @param elem1 El primer elemento sobre el cual se checkeara la relacion.<br/>
+	 * @param elem2 El segundo elemento sobre el cual se checkeara la relacion.<br/>
+	 * @return Integer. 0 si la relacion no esta definida, 1 si elem1 tiene como subordinado al 2, 2 si elem2 tiene como subordinado al 1.<br/>
 	 * @throws IllegalArgumentException Si alguno de los elementos no se encuentra en el map de reglas.
 	 */
 	public Integer checkearRelacion(String elem1, String elem2){
@@ -65,7 +64,7 @@ public class ArbolRelaciones {
 	}
 
 	/**
-	 * @param elem El elemento a checkear.
+	 * @param elem El elemento a checkear.<br/>
 	 * @param accion La accion que se va a realizar. Para poder mostrar el mensaje correspondiente si se lanza la excepcion.
 	 */
 	private void checkearElemento(String elem, String accion){
@@ -74,7 +73,7 @@ public class ArbolRelaciones {
 	}
 	
 	/**
-	 * @param subordinante El elemento subordinante en la relacion.
+	 * @param subordinante El elemento subordinante en la relacion.<br/>
 	 * @param subordinado El elemento subordinado en la relacion.
 	 */
 	private void checkearRedundancias(String subordinante, String subordinado){
@@ -83,7 +82,7 @@ public class ArbolRelaciones {
 	}
 	
 	/**
-	 * @param elem El elemento del cual se van a obtener los subordinados.
+	 * @param elem El elemento del cual se van a obtener los subordinados.<br/>
 	 * @return Set<String> Conjunto de elementos subordinados.
 	 */
 	public Set<String> getSubordinados(String elem){
