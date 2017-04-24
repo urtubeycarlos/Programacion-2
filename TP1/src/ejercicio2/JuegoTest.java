@@ -14,6 +14,12 @@ public class JuegoTest {
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
+	public void testReglaVacia(){
+		juego.agregarRegla("Tijera", "Piedra");
+	}
+	
+	
+	@Test(expected = IllegalArgumentException.class)
 	public void testReglaIguales(){
 		
 		juego.agregarElemento("Piedra");
@@ -65,6 +71,7 @@ public class JuegoTest {
 		juego.agregarRegla("Papel", "Piedra");
 		
 		assertEquals(new Integer(1), juego.jugar("Tijera", "Papel"));
+		assertEquals(new Integer(2), juego.jugar("Tijera", "Piedra"));
 		
 	}
 	

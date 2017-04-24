@@ -2,10 +2,10 @@ package ejercicio2;
 
 public class Juego {
 
-	private ConjuntoRelaciones _reglas;
+	private ArbolRelaciones _reglas;
 	
 	public Juego(){
-		_reglas = new ConjuntoRelaciones();
+		_reglas = new ArbolRelaciones();
 	}
 	
 	public void agregarElemento(String elemento){
@@ -17,7 +17,6 @@ public class Juego {
 		ganador = ganador.toLowerCase();
 		perdedor = perdedor.toLowerCase();
 		checkearIgualdad(ganador, perdedor, "agregar una regla");
-		checkearRedundancias(ganador, perdedor);
 		_reglas.agregarRelacion(ganador, perdedor);
 	}
 	
@@ -32,11 +31,6 @@ public class Juego {
 	private void checkearIgualdad(String elem1, String elem2, String accion){
 		if( elem1.equals(elem2) )
 			throw new IllegalArgumentException("No se puede " + accion + " con dos elementos iguales");
-	}
-	
-	private void checkearRedundancias(String ganador, String perdedor){
-		if( _reglas.getSubordinados(perdedor).contains(ganador) )
-			throw new IllegalArgumentException("No se admite definir reglas redundantes: " + ganador + " <-> " + perdedor);
 	}
 	
 	private void checkearReglasIndefinidas(){

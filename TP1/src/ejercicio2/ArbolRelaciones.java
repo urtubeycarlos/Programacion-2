@@ -4,12 +4,12 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ConjuntoRelaciones {
+public class ArbolRelaciones {
 
 	HashMap<String, HashSet<String>> _relaciones;
 	// HashMap<"le gana a...", HashSet<"...estos">>
 	
-	public ConjuntoRelaciones(){
+	public ArbolRelaciones(){
 		_relaciones = new HashMap<String, HashSet<String>>();
 	}
 	
@@ -30,6 +30,7 @@ public class ConjuntoRelaciones {
 	public void agregarRelacion(String subordinante, String subordinado){
 		checkearElemento(subordinante, "agregar una relacion");
 		checkearElemento(subordinado, "agregar una relacion");
+		checkearRedundancias(subordinante, subordinado);
 		_relaciones.get(subordinante).add(subordinado);
 	}
 	
@@ -56,6 +57,11 @@ public class ConjuntoRelaciones {
 	private void checkearElemento(String elem, String accion){
 		if( !_relaciones.containsKey(elem) )
 			throw new IllegalArgumentException("No se puede " + accion + " sin agregar el elemento '" + elem + "' primero");
+	}
+	
+	private void checkearRedundancias(String subordinante, String subordinado){
+		if( getSubordinados(subordinado).contains(subordinante) )
+			throw new IllegalArgumentException("No se admite definir relaciones redundantes: " + subordinante + " <-> " + subordinado);
 	}
 	
 	public Set<String> getSubordinados(String elem){
