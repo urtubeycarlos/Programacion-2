@@ -1,4 +1,4 @@
-package ejercicio1;
+package ejercicio1_alt;
 
 public class Registro {
 

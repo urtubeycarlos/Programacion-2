@@ -1,4 +1,4 @@
-package ejercicio1;
+package ejercicio1_alt;
 
 import java.util.ArrayList;
 import java.util.Arrays;
