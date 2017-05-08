@@ -1,80 +1,76 @@
 package ejercicio2;
 
 import static org.junit.Assert.*;
+
 import org.junit.Before;
 import org.junit.Test;
 
 public class JuegoTest {
-	
-	Juego juego;
 
+	private PPTLS juego;
+	
 	@Before
-	public void iniciar(){
-		juego = new Juego();
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void jugarVacio(){
-		juego.jugar("Tijera", "Papel");
+	public void init(){
+		juego = new PPTLS();
 	}
 	
-	@Test(expected = IllegalArgumentException.class)
-	public void testReglaVacia(){
-		juego.agregarRegla("Tijera", "Piedra");
+	@Test(expected=RuntimeException.class)
+	public void juegoVacioTest(){
+		juego.jugar("piedra", "tijera");
 	}
 	
-	
-	@Test(expected = IllegalArgumentException.class)
-	public void testReglaIguales(){
-		juego.agregarElemento("Piedra");
-		juego.agregarRegla("Piedra", "Piedra");
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void testReglaElemInexistente(){
-		juego.agregarElemento("Piedra");
-		juego.agregarRegla("Tijera", "Piedra");
+	@Test(expected=RuntimeException.class)
+	public void faltaElementoTest(){
+		juego.agregarObjeto("piedra");
+		juego.agregarObjeto("tijera");
+		juego.jugar("tijera", "papel");
 	}
 	
-	@Test(expected = IllegalArgumentException.class)
-	public void testReglasRedundantes(){
-	
-		juego.agregarElemento("Papel");
-		juego.agregarElemento("Tijera");
-		
-		juego.agregarRegla("Papel", "Tijera");
-		juego.agregarRegla("Tijera", "Papel");
-		
-	}
-	
-	@Test(expected = IllegalArgumentException.class)
-	public void testReglasIndefinidas(){
-
-		juego.agregarElemento("Piedra");
-		juego.agregarElemento("Papel");
-		juego.agregarElemento("Tijera");
-		
-		juego.agregarRegla("Piedra", "Tijera");
-		juego.agregarRegla("Tijera", "Papel");
-		
-		juego.jugar("Tijera", "Papel");
-		
+	@Test(expected=RuntimeException.class)
+	public void reglaIndefinidaTest(){
+		juego.agregarObjeto("piedra");
+		juego.agregarObjeto("papel");
+		juego.jugar("piedra", "papel");
 	}
 	
 	@Test
-	public void testJuegoNormal1() {
+	public void jugadaIgualesTest(){
+		juego.agregarObjeto("piedra");
+		juego.agregarObjeto("papel");
+		juego.agregarObjeto("tijera");
 		
-		juego.agregarElemento("Piedra");
-		juego.agregarElemento("Tijera");
-		juego.agregarElemento("Papel");
+		juego.agregarRegla("piedra", "tijera");
+		juego.agregarRegla("papel", "piedra");
+		juego.agregarRegla("tijera", "papel");
 		
-		juego.agregarRegla("Piedra", "Tijera");
-		juego.agregarRegla("Tijera", "Papel");
-		juego.agregarRegla("Papel", "Piedra");
-		
-		assertEquals(new Integer(1), juego.jugar("Tijera", "Papel"));
-		assertEquals(new Integer(2), juego.jugar("Tijera", "Piedra"));
-		
+		juego.jugar("piedra", "piedra");
 	}
 	
+	@Test
+	public void juegoNormalTest() {
+		juego.agregarObjeto("piedra");
+		juego.agregarObjeto("papel");
+		juego.agregarObjeto("tijera");
+		
+		juego.agregarRegla("piedra", "tijera");
+		juego.agregarRegla("papel", "piedra");
+		juego.agregarRegla("tijera", "papel");
+		
+		assertEquals("piedra le gana a tijera!", juego.jugar("piedra", "tijera"));
+		assertEquals("papel le gana a piedra!", juego.jugar("papel", "piedra"));
+		assertEquals("tijera le gana a papel!", juego.jugar("papel", "tijera"));
+		
+	}
+
+	
+	@Test
+	public void juegoNormalConSimilaresTest(){
+		juego.agregarObjeto("piedra");
+		juego.agregarObjeto("papel");
+		juego.agregarObjeto("tijera");
+		
+		juego.agregarRegla("piedra", "tijera");
+		juego.agregarRegla("papel", "piedra");
+		juego.agregarRegla("tijera", "papel");
+	}
 }
