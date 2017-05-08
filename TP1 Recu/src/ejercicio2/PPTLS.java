@@ -16,8 +16,14 @@ public class PPTLS {
 	
 	public void agregarRegla(String objeto1, String objeto2){
 		
+		if( objeto1.equals(objeto2) )
+			throw new IllegalArgumentException("No se permite definir una regla entre elementos iguales");
+		
 		Objeto objetoTemp1 = getObjeto(objeto1);
 		Objeto objetoTemp2 = getObjeto(objeto2);
+
+		if( objetoTemp2.leGanoA(objetoTemp1) )
+			throw new IllegalArgumentException("No se puede agregar una regla redundante. " + objeto1 + " <-> " +objeto2);
 		
 		objetoTemp1.leGanaA(objetoTemp2);
 		
@@ -40,29 +46,22 @@ public class PPTLS {
 		if( _objetos.size() <=1 )
 			throw new RuntimeException("No se puede jugar sin agregar 2 o mas elementos");
 		
+		if( objeto1.equals(objeto2) )
+			throw new IllegalArgumentException("No se puede jugar con dos elementos iguales");
+			
 		Objeto objetoTemp1 = getObjeto(objeto1);
 		Objeto objetoTemp2 = getObjeto(objeto2);
 		
 		if( objetoTemp1 == null || objetoTemp2==null ){
-			throw new RuntimeException("No se puede jugar si agregar el objeto: " + ((objetoTemp1 == null)? objeto1:objeto2) );
+			throw new RuntimeException("No se puede jugar si antes agregar el objeto: " + ((objetoTemp1 == null)? objeto1:objeto2) );
 		}
 		
-		if( objetoTemp1.leGanoA(objetoTemp2) ){
-			
-			if( objetoTemp2.leGanoA(objetoTemp1) ){
-				throw new RuntimeException("La regla es redundante. " + objeto1 + " le gana a " + objeto2 + ", y " + objeto2 + " le gana a " + objeto1);
-			} else {
-				return objeto1 + " le gana a " + objeto2 + "!";
-			}
-			
+		if( objetoTemp1.leGanoA(objetoTemp2) ) {
+			return objeto1 + " le gana a " + objeto2 + "!";
+		} else if( objetoTemp2.leGanoA(objetoTemp1) ) {
+			return objeto2 + " le gana a " + objeto1 + "!";
 		} else {
-			
-			if( objetoTemp2.leGanoA(objetoTemp1) ){
-				return objeto2 + " le gana a " + objeto1 + "!";
-			} else {
-				throw new RuntimeException("No existe una regla definida para " + objeto1 + " y " + objeto2);
-			}
-			
+			throw new RuntimeException("No existe una regla definida para " + objeto1 + " y " + objeto2);
 		}
 		
 	}

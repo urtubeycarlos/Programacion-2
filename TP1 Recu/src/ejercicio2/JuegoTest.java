@@ -33,17 +33,22 @@ public class JuegoTest {
 		juego.jugar("piedra", "papel");
 	}
 	
-	@Test
+	@Test(expected=IllegalArgumentException.class)
 	public void jugadaIgualesTest(){
 		juego.agregarObjeto("piedra");
 		juego.agregarObjeto("papel");
 		juego.agregarObjeto("tijera");
 		
-		juego.agregarRegla("piedra", "tijera");
-		juego.agregarRegla("papel", "piedra");
-		juego.agregarRegla("tijera", "papel");
-		
 		juego.jugar("piedra", "piedra");
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void reglaRedundanteTest(){
+		juego.agregarObjeto("tijera");
+		juego.agregarObjeto("piedra");
+		
+		juego.agregarRegla("tijera", "piedra");
+		juego.agregarRegla("piedra", "tijera");
 	}
 	
 	@Test
