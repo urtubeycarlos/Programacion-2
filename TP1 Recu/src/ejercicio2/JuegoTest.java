@@ -136,9 +136,11 @@ public class JuegoTest {
 	
 	@Test
 	public void juegoNormalConParecidosTest(){
+		
 		juego.agregarObjeto("piedra");
 		juego.agregarObjeto("papel");
 		juego.agregarObjeto("tijera");
+		
 		juego.agregarObjetoParecido("papel a4", "papel");
 		juego.agregarObjetoParecido("papel a5", "papel");
 		juego.agregarObjetoParecido("piedra roja", "piedra");
