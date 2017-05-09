@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class CashFlow {
 	
 	public ArrayList<Registro> registros;
-	private Integer saldo;	//saldo gral
+	private Integer saldo;
 	private static Integer cantReg;
 	
 	public CashFlow(){
@@ -23,10 +23,6 @@ public class CashFlow {
 		
 		saldo = saldo + r.importe;
 		
-		// por construccion fechaReal viene vacio, por las dudas pregunto
-		if (saldo < 0 && r.fechaReal != null)
-			throw new RuntimeException("saldo negativo!: " + saldo);
-		
 	}
 
 	private void agregarRegistros(ArrayList<Registro> listaRegistros){
@@ -40,7 +36,6 @@ public class CashFlow {
 		CashFlow mejorCashFlow = buscarCashFlowOptimo(posiblesSoluciones);
 		registros = mejorCashFlow.registros;
 		setearFechasCorrectas();
-		System.out.println(registros);
 	}
 
 	
@@ -82,7 +77,7 @@ public class CashFlow {
 			resultado.add(aux);
 		}
 		
-		System.out.println("Resultado permutaciones: " + resultado);
+//		System.out.println("Resultado permutaciones: " + resultado);
 		return resultado;
 		
 	}
@@ -106,7 +101,6 @@ public class CashFlow {
 			}	
 		}
 		
-		System.out.println("El mejor:  " + elMejorHastaAhora);
 		return elMejorHastaAhora;
 	}
 
@@ -114,10 +108,14 @@ public class CashFlow {
 		int acum = 0;
 	
 		for(int i=0; i<listaRegistros.size(); i++){
-			acum = acum + ( listaRegistros.get(i).fecha - registros.get(i).fecha );
+			acum = acum + Math.abs(( listaRegistros.get(i).fecha - registros.get(i).fecha ));
 		}
 		
 		return acum;
+	}
+	
+	public int getDistAcumulada(){
+		return calcDistanciaAcumulada(this.registros);
 	}
 
 	private boolean seAcumulaSaldoNegativo(ArrayList<Registro> listaRegistros){

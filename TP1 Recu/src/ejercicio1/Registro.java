@@ -1,19 +1,24 @@
-package ejercicio1_alt;
+package ejercicio1;
 
 public class Registro {
 
-	int importe;
-	int fecha;
-	int fechaReal;
+	Integer importe;
+	Integer fecha;
+	Integer fechaReal;
 
 	public Registro( Integer importe){
 		this.importe = importe;
 	}
-	
+
+	public Registro copiarRegistro(){
+		Registro ret = new Registro(importe.intValue());
+		ret.fecha = this.fecha.intValue();
+		return ret;
+	}
+
 	@Override
 	public String toString(){
 		return "{ Fecha: " + fecha  + ";  Fecha real: " + fechaReal + ";  Importe: " + importe + " }" ;
 	}
-
 
 }
