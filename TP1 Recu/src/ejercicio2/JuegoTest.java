@@ -42,6 +42,26 @@ public class JuegoTest {
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
+	public void reglaIgualesTest(){
+		juego.agregarObjeto("piedra");
+		juego.agregarObjeto("papel");
+		juego.agregarObjeto("tijera");
+		
+		juego.agregarRegla("piedra", "piedra");
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void reglaEntreParecidosTest(){
+		juego.agregarObjeto("piedra");
+		juego.agregarObjeto("papel");
+		juego.agregarObjeto("tijera");
+		
+		juego.agregarObjetoParecido("piedra roja", "piedra");
+		
+		juego.agregarRegla("piedra", "piedra roja");
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
 	public void jugadaIgualesTest(){
 		juego.agregarObjeto("piedra");
 		juego.agregarObjeto("papel");
