@@ -16,6 +16,22 @@ public class Main {
 		c1.obtenerSaldoPositivoSwapeandoPocasVeces();
 		
 		System.out.println("C1 Swapeado: " + c1);
+		
+		
+		
+		
+		CashFlow c2 = new CashFlow();
+		
+		c2.agregarRegistro(new Registro(-100));
+		c2.agregarRegistro(new Registro(100));
+		c2.agregarRegistro(new Registro(-100));
+		c2.agregarRegistro(new Registro(100));
+		
+		System.out.println("C2 original: " + c2);
+		
+		c2.obtenerSaldoPositivoSwapeandoPocasVeces2();
+		
+		System.out.println("C2 Swapeado: " + c2);
 
 	}
 

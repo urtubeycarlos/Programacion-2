@@ -2,6 +2,7 @@ package ejercicio1;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class CashFlow {
 	
@@ -49,6 +50,26 @@ public class CashFlow {
 		
 	}
 	
+	public void obtenerSaldoPositivoSwapeandoPocasVeces2(){
+		
+		if( !sePuedeConseguirSaldoPositivo() ) //O(n)
+			throw new RuntimeException("Nunca se va a poder conseguir saldo positivo");
+		
+		for(int i=registros.size(); i>0; i--){
+			if ( seAcumulaSaldoNegativo( registros.subList(0, i) ) ){
+				for(int j=0; j<i; j++){
+					if( registros.get(j).importe < 0 && registros.get(j+1).importe > 0 ){
+						Collections.swap(registros, j, j+1);
+						break;
+					}
+				}
+			}
+		}
+		
+		setearFechasCorrectas();
+		
+	}
+	
 	private void setearFechasCorrectas() {
 		//Recorre los registros y les setea la fecha que les correspondia antes de ser swapeados.
 		//Complejidad O(n), recorre n registros una vez.
@@ -58,6 +79,15 @@ public class CashFlow {
 			r.fechaReal = temp;
 			r.fecha = i;
 		}
+	}
+	
+	public boolean seAcumulaSaldoNegativo(List<Registro> list){
+		int acum = 0;
+		for(Registro r:list){
+			acum += r.importe;
+			if( acum<0 )
+				return true;
+		} return false;
 	}
 	
 	public int obtenerSaldoNegAcumulado(){
