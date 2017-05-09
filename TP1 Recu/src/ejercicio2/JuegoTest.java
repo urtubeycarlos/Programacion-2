@@ -132,7 +132,48 @@ public class JuegoTest {
 		juego.agregarObjetoParecido("papel a4", "papel");
 		
 	}
+	
 
+	@Test(expected=IllegalArgumentException.class)
+	public void jugadaElementosParecidosIguales(){
+		
+		juego.agregarObjeto("piedra");
+		juego.agregarObjeto("papel");
+		
+		juego.agregarObjetoParecido("papel a4", "papel");
+		
+		juego.jugar("papel a4", "papel a4");
+		
+	}
+
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void jugadaElementosParecidosNoIguales(){
+		
+		juego.agregarObjeto("piedra");
+		juego.agregarObjeto("papel");
+		
+		juego.agregarObjetoParecido("papel a4", "papel");
+		juego.agregarObjetoParecido("papel a5", "papel");
+		
+		juego.jugar("papel a4", "papel a5");
+		
+	}
+	
+	
+	@Test
+	public void agregarReglasParecidosInvertidas(){
+		
+		juego.agregarObjeto("piedra");
+		juego.agregarObjeto("papel");
+		
+		juego.agregarRegla("papel", "piedra");
+		
+		juego.agregarObjetoParecido("papel a4", "papel");
+		
+		assertEquals("papel a4 le gana a piedra!", juego.jugar("papel a4", "piedra") );
+	}
+	
 	
 	@Test
 	public void juegoNormalConParecidosTest(){
