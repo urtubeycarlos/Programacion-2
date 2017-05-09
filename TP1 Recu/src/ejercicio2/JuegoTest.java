@@ -26,6 +26,14 @@ public class JuegoTest {
 		juego.jugar("tijera", "papel");
 	}
 	
+	@Test(expected=IllegalArgumentException.class)
+	public void faltaElementoOriginalTest(){
+		juego.agregarObjeto("piedra");
+		juego.agregarObjeto("tijera");
+		juego.agregarObjetoParecido("papel a4", "papel");
+		juego.jugar("tijera", "papel");
+	}
+	
 	@Test(expected=RuntimeException.class)
 	public void reglaIndefinidaTest(){
 		juego.agregarObjeto("piedra");
