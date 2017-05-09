@@ -31,7 +31,14 @@ public class PPTLS {
 		
 		Objeto objetoTemp1 = getObjeto(objeto1);
 		Objeto objetoTemp2 = getObjeto(objeto2);
-
+		
+		
+		if( objetoTemp1 == null || objetoTemp2 == null )
+			throw new IllegalArgumentException("No se puede jugar si antes agregar el objeto: " + ((objetoTemp1 == null)? objeto1:objeto2) );
+		
+		if( objetoTemp1.esParecido(objeto2) )
+			throw new IllegalArgumentException("No se permite definir una regla entre elementos parecidos");
+		
 		if( objetoTemp2.leGanoA(objetoTemp1) )
 			throw new IllegalArgumentException("No se puede agregar una regla redundante. " + objeto1 + " <-> " +objeto2);
 		
@@ -62,9 +69,8 @@ public class PPTLS {
 		Objeto objetoTemp1 = getObjeto(objeto1);
 		Objeto objetoTemp2 = getObjeto(objeto2);
 		
-		if( objetoTemp1 == null || objetoTemp2 == null ){
-			throw new RuntimeException("No se puede jugar si antes agregar el objeto: " + ((objetoTemp1 == null)? objeto1:objeto2) );
-		}
+		if( objetoTemp1 == null || objetoTemp2 == null )
+			throw new IllegalArgumentException("No se puede jugar si antes agregar el objeto: " + ((objetoTemp1 == null)? objeto1:objeto2) );
 		
 		if( objetoTemp1.leGanoA(objetoTemp2) ) {
 			return objeto1 + " le gana a " + objeto2 + "!";
