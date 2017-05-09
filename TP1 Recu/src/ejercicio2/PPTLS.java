@@ -14,6 +14,16 @@ public class PPTLS {
 		_objetos.add(new Objeto(nombre_objeto));
 	}
 	
+	public void agregarObjetoParecido(String objeto_nuevo, String objeto_al_que_se_parece){
+		
+		Objeto obj_al_que_se_parece = getObjeto(objeto_al_que_se_parece);
+		if( obj_al_que_se_parece == null )
+			throw new IllegalArgumentException("No se puede agregar el objeto " + objeto_nuevo + " sin antes agregar " + objeto_al_que_se_parece);
+		
+		obj_al_que_se_parece.agregarParecido(objeto_nuevo);
+		
+	}
+	
 	public void agregarRegla(String objeto1, String objeto2){
 		
 		if( objeto1.equals(objeto2) )
@@ -34,7 +44,7 @@ public class PPTLS {
 		Objeto ret = null;
 		
 		for(Objeto objs:_objetos){
-			if( objs.nombre.equals(nombre_objeto) )
+			if( objs.nombre.equals(nombre_objeto) || objs.esParecido(nombre_objeto) )
 				ret = objs;
 		}
 		
@@ -52,7 +62,7 @@ public class PPTLS {
 		Objeto objetoTemp1 = getObjeto(objeto1);
 		Objeto objetoTemp2 = getObjeto(objeto2);
 		
-		if( objetoTemp1 == null || objetoTemp2==null ){
+		if( objetoTemp1 == null || objetoTemp2 == null ){
 			throw new RuntimeException("No se puede jugar si antes agregar el objeto: " + ((objetoTemp1 == null)? objeto1:objeto2) );
 		}
 		

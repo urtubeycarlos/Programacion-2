@@ -73,9 +73,12 @@ public class JuegoTest {
 		juego.agregarObjeto("piedra");
 		juego.agregarObjeto("papel");
 		juego.agregarObjeto("tijera");
+		juego.agregarObjetoParecido("papel a4", "papel");
 		
 		juego.agregarRegla("piedra", "tijera");
 		juego.agregarRegla("papel", "piedra");
 		juego.agregarRegla("tijera", "papel");
+		assertEquals("tijera le gana a papel!", juego.jugar("papel", "tijera"));
+		assertEquals("tijera le gana a papel a4!", juego.jugar("papel a4", "tijera"));
 	}
 }

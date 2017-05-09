@@ -6,12 +6,12 @@ public class Objeto {
 
 	public final String nombre;
 	private HashSet<Objeto> _leGanaA;
-	private HashSet<Objeto> _similares;
+	private HashSet<String> _parecidos;
 	
 	public Objeto(String nombre_objeto){
 		nombre = nombre_objeto;
 		_leGanaA = new HashSet<Objeto>();
-		_similares = new HashSet<Objeto>();
+		_parecidos = new HashSet<String>();
 	}
 	
 	public void leGanaA(Objeto obj){
@@ -19,10 +19,6 @@ public class Objeto {
 			_leGanaA.add(obj);
 	}
 
-	public void agregarParecido(Objeto obj){
-		if( !existeParecido(obj) )	
-			_similares.add(obj);
-	}
 	
 	public boolean leGanoA(Objeto obj){
 		for( Objeto contrincante:_leGanaA )
@@ -31,11 +27,12 @@ public class Objeto {
 		return false;
 	}
 	
-	private boolean existeParecido(Objeto obj){
-		for( Objeto similar:_similares )
-			if( similar.nombre.equals(obj.nombre) )
-				return true;
-		return false;
+	public void agregarParecido(String obj_parecido){
+		_parecidos.add(obj_parecido);
+	}
+
+	public boolean esParecido(String obj){
+		return _parecidos.contains(obj);
 	}
 	
 }
