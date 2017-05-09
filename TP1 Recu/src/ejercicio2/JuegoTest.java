@@ -64,21 +64,22 @@ public class JuegoTest {
 		assertEquals("piedra le gana a tijera!", juego.jugar("piedra", "tijera"));
 		assertEquals("papel le gana a piedra!", juego.jugar("papel", "piedra"));
 		assertEquals("tijera le gana a papel!", juego.jugar("papel", "tijera"));
-		
 	}
 
 	
 	@Test
-	public void juegoNormalConSimilaresTest(){
+	public void juegoNormalConParecidosTest(){
 		juego.agregarObjeto("piedra");
 		juego.agregarObjeto("papel");
 		juego.agregarObjeto("tijera");
 		juego.agregarObjetoParecido("papel a4", "papel");
+		juego.agregarObjetoParecido("piedra roja", "piedra");
 		
 		juego.agregarRegla("piedra", "tijera");
 		juego.agregarRegla("papel", "piedra");
 		juego.agregarRegla("tijera", "papel");
 		assertEquals("tijera le gana a papel!", juego.jugar("papel", "tijera"));
 		assertEquals("tijera le gana a papel a4!", juego.jugar("papel a4", "tijera"));
+		assertEquals("papel a4 le gana a piedra roja!", juego.jugar("papel a4", "piedra roja"));
 	}
 }
