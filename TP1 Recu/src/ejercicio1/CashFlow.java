@@ -29,7 +29,7 @@ public class CashFlow {
 	
 	public void obtenerSaldoPositivoSwapeandoPocasVeces(){
 		
-		if( !sePuedeConseguirSaldoPositivo() ) //O(n)
+		if( !sePuedeConseguirSaldoPositivo() )
 			throw new RuntimeException("Nunca se va a poder conseguir saldo positivo");
 		
 		for(int i=registros.size(); i>0; i--){
