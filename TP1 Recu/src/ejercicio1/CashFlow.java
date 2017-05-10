@@ -26,37 +26,14 @@ public class CashFlow {
 		saldo = saldo + r.importe;
 		
 	}
-
+	
 	public void obtenerSaldoPositivoSwapeandoPocasVeces(){
 		
 		if( !sePuedeConseguirSaldoPositivo() ) //O(n)
 			throw new RuntimeException("Nunca se va a poder conseguir saldo positivo");
 		
-		int saldoNegAcumulado = obtenerSaldoNegAcumulado(); 
-		while( saldoNegAcumulado < 0 ){ 
-			
-			for(int i=0; i<registros.size()-1; i++){
-				
-				if( ( registros.get(i).importe < 0 ) && !( registros.get(i+1).importe < 0 ) ){
-					saldoNegAcumulado += ( registros.get(i+1).importe - ( registros.get(i).importe + registros.get(i+1).importe ));
-					Collections.swap(registros, i, i+1);
-					break;
-				}
-			}
-			
-		}
-		
-		setearFechasCorrectas();
-		
-	}
-	
-	public void obtenerSaldoPositivoSwapeandoPocasVeces2(){
-		
-		if( !sePuedeConseguirSaldoPositivo() ) //O(n)
-			throw new RuntimeException("Nunca se va a poder conseguir saldo positivo");
-		
 		for(int i=registros.size(); i>0; i--){
-			if ( seAcumulaSaldoNegativo( registros.subList(0, i) ) ){
+			while ( seAcumulaSaldoNegativo( registros.subList(0, i) ) ){
 				for(int j=0; j<i; j++){
 					if( registros.get(j).importe < 0 && registros.get(j+1).importe > 0 ){
 						Collections.swap(registros, j, j+1);
