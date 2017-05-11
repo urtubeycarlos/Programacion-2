@@ -37,7 +37,7 @@ public class CashFlow {
 		for(int i=registros.size(); i>0; i--){ //Recorre la lista de registros de atras para adelante para hacer mas intuitiva
 											   //la generacion de sublistas. En el peor de los casos hace n iteraciones.
 			while ( seAcumulaSaldoNegativo( registros.subList(0, i) ) ){ //Vamos generando sublistas desde 0 hasta i.          <- El peor de los casos acá seria que tengamos un solo monto positivo grande a lo ultimo que tengamos que mover hacia adelante
-																		//iteramos n veces (en el peor de los casos) una (n-1) sucesiones
+																		//iteramos n veces (en el peor de los casos) unas (n-1) sucesiones
 				for(int j=0; j<i; j++){	//Recorre la sublistal, itera n veces (en el peor de los casos) sucesiones (n-1) otra vez <- El peor de los casos acá seria que tengamos un solo monto positivo grande a lo ultimo que tengamos que mover hacia adelante
 					if( registros.get(j).importe < 0 && registros.get(j+1).importe > 0 ){ //Si se encuentra un saldo pos al lado de uno neg entonces...
 						Collections.swap(registros, j, j+1); //...swapea, en un ArrayList es O(1), se descarta.
