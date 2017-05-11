@@ -22,10 +22,14 @@ public class Main {
 		
 		CashFlow c2 = new CashFlow();
 		
-		c2.agregarRegistro(new Registro(-100));
-		c2.agregarRegistro(new Registro(-100));
-		c2.agregarRegistro(new Registro(-100));
-		c2.agregarRegistro(new Registro(1000));
+		c2.agregarRegistro(new Registro(-10));
+		c2.agregarRegistro(new Registro(-10));
+		c2.agregarRegistro(new Registro(5));
+		c2.agregarRegistro(new Registro(5));
+		c2.agregarRegistro(new Registro(5));
+		c2.agregarRegistro(new Registro(5));
+		c2.agregarRegistro(new Registro(5));
+		c2.agregarRegistro(new Registro(5));
 		
 		System.out.println("C2 original: " + c2);
 		
