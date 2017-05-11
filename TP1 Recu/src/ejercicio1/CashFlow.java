@@ -29,21 +29,49 @@ public class CashFlow {
 	
 	public void obtenerSaldoPositivoSwapeandoPocasVeces(){
 		
-		if( !sePuedeConseguirSaldoPositivo() )
+		if( !sePuedeConseguirSaldoPositivo() ) //Checkea si en algun momento se puede obtener saldo positivo. Complejidad O(n)
 			throw new RuntimeException("Nunca se va a poder conseguir saldo positivo");
 		
-		for(int i=registros.size(); i>0; i--){
-			while ( seAcumulaSaldoNegativo( registros.subList(0, i) ) ){
-				for(int j=0; j<i; j++){
-					if( registros.get(j).importe < 0 && registros.get(j+1).importe > 0 ){
-						Collections.swap(registros, j, j+1);
-						break;
+		//------------------ Bloque principal -----------------------------//
+		
+		for(int i=registros.size(); i>0; i--){ //Recorre la lista de registros de atras para adelante para hacer mas intuitiva
+											   //la generacion de sublistas. En el peor de los casos hace n iteraciones.
+			while ( seAcumulaSaldoNegativo( registros.subList(0, i) ) ){ //Vamos generando sublistas desde 0 hasta i.          <- El peor de los casos acá seria que tengamos un solo monto positivo grande a lo ultimo que tengamos que mover hacia adelante
+																		//iteramos n veces (en el peor de los casos) una (n-1) sucesiones
+				for(int j=0; j<i; j++){	//Recorre la sublistal, itera n veces (en el peor de los casos) sucesiones (n-1) otra vez <- El peor de los casos acá seria que tengamos un solo monto positivo grande a lo ultimo que tengamos que mover hacia adelante
+					if( registros.get(j).importe < 0 && registros.get(j+1).importe > 0 ){ //Si se encuentra un saldo pos al lado de uno neg entonces...
+						Collections.swap(registros, j, j+1); //...swapea, en un ArrayList es O(1), se descarta.
+						break; //Corta el ciclo para que no haya problemas con el indice
 					}
 				}
 			}
 		}
 		
-		setearFechasCorrectas();
+		//La formula final quedaria:           n * n * 2(n-1)
+		//                                    ----------------
+		//                                      	  2
+		
+		// Seria una sumatoria de Gauss doble. La primera n seria por el primer ciclo, la segunda n por el while
+		// 2(n-1) porque hacemos una sucesion de (n-1) dos veces, una para hacer el metodo seAcumulaSaldoNegativo y otra para recorrer la sublista
+		// Divido 2 por la definicón la sumatoria de Gauss.
+		
+		// Entonces...
+		// Los 2 se cancelan: ---->    n * n * (n-1)
+		// Distributiva: ----> n * (n^2 - 1n)
+		// Distributiva (again): -----> n^3 - 1n^2
+		
+		// En notacion O grande quedaría el mayor de los exponentes: -----> O(n^3)
+		
+		
+		//Total bloque principal O(n^3)
+		
+		//------------------ Bloque principal -----------------------------//
+		
+		
+		setearFechasCorrectas(); //Setea las fechas correctas. O(n)
+		
+		// Total final: -----> O(n) + O(n^3) + O(n) = O(n^3)
+		// (Cuando se suman las O's queda la mas grande)
 		
 	}
 	
