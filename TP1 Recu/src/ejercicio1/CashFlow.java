@@ -77,6 +77,8 @@ public class CashFlow {
 	
 	private void setearFechasCorrectas() {
 		//Recorre los registros y les setea la fecha que les correspondia antes de ser swapeados.
+		//La fecha actual (es decir, despues de swapearse) es su posicion en el ArrayList, la real es que posiciòn en ArrayList
+		//que tenian antes de ser swapeadas.
 		//Complejidad O(n), recorre n registros una vez.
 		for(int i=0; i<registros.size(); i++){
 			Registro r = registros.get(i);
@@ -87,6 +89,7 @@ public class CashFlow {
 	}
 	
 	public boolean seAcumulaSaldoNegativo(List<Registro> list){
+		//Recorre la lista de registros y si en algún momento se acumulo un saldo negativo entonces devuelve true.
 		int acum = 0;
 		for(Registro r:list){
 			acum += r.importe;
@@ -94,32 +97,20 @@ public class CashFlow {
 				return true;
 		} return false;
 	}
-	
-	public int obtenerSaldoNegAcumulado(){
-		int acum_neg = 0;
-		int acum_aux = 0;
-		for(Registro r:registros){
-			acum_aux += r.importe;
-			if( acum_aux < 0 ){
-				acum_neg += acum_aux;
-				acum_aux = 0;
-			}
-		} return acum_neg;
-	}
 
 	private boolean sePuedeConseguirSaldoPositivo(){
 		//Complejidad O(n). Recorre n registros una vez.
 		//Operaciones aritmeticas tienen complejidad O(1)
 		int acum_pos = 0;
 		int acum_neg = 0;
-		for(Registro r:registros){
+		for(Registro r:registros){ //Recorre los registros
 			if( r.importe > 0)
-				acum_pos += r.importe;
+				acum_pos += r.importe; //Acumula todos los saldos positivos
 			if ( r.importe < 0)
-				acum_neg += r.importe;
+				acum_neg += r.importe; //Acumula todos los saldos negativos
 		}
 
-		if( acum_pos+acum_neg >= 0 )
+		if( acum_pos+acum_neg >= 0 ) //Si la suma entre los pos y los negs da positiva entonces podemos conseguir saldo positivo en algun momento :D
 			return true;
 		return false;
 		
