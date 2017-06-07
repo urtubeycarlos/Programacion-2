@@ -2,8 +2,8 @@ package prog2.tp2_2017a;
 
 import java.util.List;
 
-public class TrieChar<V>
-{
+public class TrieChar<V> {
+	
 	private Nodo<V> raiz;
 	private Alfabeto<Character> alf;
 
@@ -14,7 +14,6 @@ public class TrieChar<V>
 
 	/**
 	 * Agrega una cadena a la estructura, asociándole un determinado valor.
-	 *
 	 * Si la clave ya existía, se reemplaza su valor asociado.
 	 */
 	public void agregar(String clave, V valor) {
@@ -61,4 +60,5 @@ public class TrieChar<V>
 	public List<V> busqueda(String prefijo) {
 		return null;
 	}
+
 }
