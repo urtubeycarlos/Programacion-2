@@ -36,11 +36,12 @@ public class TestTrie
 
 		@Test
 		public void ejemploConsigna() {
-//			libros.agregar("9785267006323", "Cien años de soledad");
+			libros.agregar("9785267006323", "Cien años de soledad");
 			libros.agregar("9788490093795", "El amor de tu vida");
 			libros.agregar("9785423113601", "El amor en los tiempos del cólera");
 
 			assertEquals("El amor de tu vida", libros.obtener("9788490093795"));
+			assertEquals("Cien años de soledad", libros.obtener("9785267006323"));
 
 			busq = libros.busqueda("9785");
 			assertEquals(2, busq.size());
