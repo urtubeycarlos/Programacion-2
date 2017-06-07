@@ -10,6 +10,7 @@ class Nodo<V>
 	V val;
 	private Nodo<V> hijos[];
 
+	@SuppressWarnings("unchecked")
 	Nodo(int tam) {
 		hijos = new Nodo[tam];
 	}
