@@ -9,6 +9,7 @@ public class Palabras implements Alfabeto<Character> {
 
 	@Override
 	public int indice(Character c) {
+		//FIXME: Agregar el caso de la ñ.
 		if (c >= 'a' && c <= 'z')
 			return c - 'a';
 		throw new RuntimeException("Caracter no válido: " + c);
