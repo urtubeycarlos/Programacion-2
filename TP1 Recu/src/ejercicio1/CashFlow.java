@@ -49,7 +49,7 @@ public class CashFlow {
 		
 		//La formula final quedaria:           n * n * 2(n-1)
 		//                                    ----------------
-		//                                      	  2
+		//                                      	 2
 		
 		// Seria una sumatoria de Gauss doble. La primera n seria por el primer ciclo, la segunda n por el while
 		// 2(n-1) porque hacemos una sucesion de (n-1) dos veces, una para hacer el metodo seAcumulaSaldoNegativo y otra para recorrer la sublista
