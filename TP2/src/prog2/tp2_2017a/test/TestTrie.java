@@ -43,6 +43,8 @@ public class TestTrie
 			assertEquals("El amor de tu vida", libros.obtener("9788490093795"));
 			assertEquals("Cien años de soledad", libros.obtener("9785267006323"));
 
+			System.out.println(libros);
+			
 			busq = libros.busqueda("9785");
 			assertEquals(2, busq.size());
 			assertTrue(busq.contains("Cien años de soledad"));

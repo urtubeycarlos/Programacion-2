@@ -120,10 +120,11 @@ public class TrieChar<V> {
 	
 	@Override
 	public String toString(){
-		//TODO: Implementar!
-		String ret = "";
+		String ret = "TrieChar: { ";
+		for(String clave:claves)
+			ret = ret + clave + " = " + this.obtener(clave).toString() + ", ";
+		ret = ret.substring(0, ret.length()-2) + " }";
 		return ret;
 	}
-	
 	
 }
