@@ -23,12 +23,19 @@ public class AlfabetoADN implements Alfabeto<Character> {
 
 	@Override
 	public boolean equals(Object o){
+		
+		if( o == null )
+			return false;
+		if( !(o instanceof AlfabetoADN) )
+			return false;
+		
 		AlfabetoADN a2 = (AlfabetoADN) o;
+		
 		if( this.tam() != a2.tam() )
 			return false;
 		boolean acum = true;
 		for(int i=0; i<this.tam(); i++)
-			acum &= this.obtenerCaracter(i).equals( a2.obtenerCaracter(i) );
+			acum = acum && this.obtenerCaracter(i).equals( a2.obtenerCaracter(i) );
 		return acum;
 	}
 	

@@ -22,17 +22,27 @@ public class Digitos implements Alfabeto<Character>
 
 	@Override
 	public Character obtenerCaracter(int indice) {
-		return (char) (indice + '0');
+		if( indice>=0 && indice < tam() )
+			return (char) (indice + '0');
+		throw new RuntimeException("indice no válido: " + indice);
+		
 	}
 	
 	@Override
-	public boolean equals(Object o){
+	public boolean equals(Object o){ 
+		
+		if( o == null )
+			return false;
+		if( !(o instanceof Digitos) )
+			return false;
+		
 		Digitos d2 = (Digitos) o;
 		if( d2.tam() != this.tam()  )
 			return false;
+		
 		boolean acum = true;
 		for(int i=0; i<this.tam(); i++)
-			acum &= this.obtenerCaracter(i).equals( d2.obtenerCaracter(i) );
+			acum = acum && this.obtenerCaracter(i).equals( d2.obtenerCaracter(i) );
 		return acum;
 	}
 
