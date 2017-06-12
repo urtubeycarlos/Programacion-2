@@ -1,15 +1,18 @@
 package prog2.tp2_2017a;
 
+import java.util.HashSet;
 import java.util.List;
 
 public class TrieChar<V> {
 	
 	private Nodo<V> raiz;
 	private Alfabeto<Character> alf;
+	private HashSet<String> claves;
 
 	public TrieChar(Alfabeto<Character> alf) {
 		this.alf = alf;
 		this.raiz = new Nodo<V>( alf.tam() );
+		this.claves = new HashSet<String>();
 	}
 
 	/**
@@ -17,6 +20,7 @@ public class TrieChar<V> {
 	 * Si la clave ya existía, se reemplaza su valor asociado.
 	 */
 	public void agregar(String clave, V valor) {
+		claves.add(clave);
 		agregar(clave, valor, raiz);
 	}
 
@@ -41,6 +45,8 @@ public class TrieChar<V> {
 	 * Devuelve el valor asociado a una clave, o null si no existe.
 	 */
 	public V obtener(String clave) {
+		if( !claves.contains(clave) )
+			return null;
 		return obtener(clave, raiz);
 	}
 	
@@ -61,4 +67,28 @@ public class TrieChar<V> {
 		return null;
 	}
 
+	@Override
+	public boolean equals(Object o){
+
+		if( o == null )
+			return false;
+		
+		if( !(o instanceof TrieChar) )
+			return false;
+			
+		TrieChar<V> t2 = (TrieChar<V>) o;
+		
+		if( !this.alf.equals( t2.alf ) )
+			return false;
+		if( this.claves.size() != t2.claves.size() || !this.claves.equals( t2.claves ) )
+			return false;
+		
+		for( String clave:claves )
+			if( !this.obtener(clave).equals( t2.obtener(clave) ) )
+				return false;
+		
+		return true;
+		
+	}
+	
 }

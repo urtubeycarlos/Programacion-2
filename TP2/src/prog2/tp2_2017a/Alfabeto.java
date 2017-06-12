@@ -14,4 +14,6 @@ public interface Alfabeto<T>
 	 * si el símbolo no es válido.
 	 */
 	int indice(T elem);
+	
+	Character obtenerCaracter(int indice);
 }
