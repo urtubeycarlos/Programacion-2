@@ -102,6 +102,11 @@ public class TestTrie
 				titulo = t;
 			}
 
+			@Override
+			public String toString(){
+				return titulo + " - " + autor;
+			}
+			
 			static final Libro orwell = new Libro("George Orwell", "1984");
 			static final Libro murakami = new Libro("Haruki Murakami", "1Q84");
 		}
