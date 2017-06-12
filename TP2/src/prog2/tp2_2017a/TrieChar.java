@@ -1,5 +1,6 @@
 package prog2.tp2_2017a;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class TrieChar<V> {
 	}
 
 	private void agregar(String clave, V valor, Nodo<V> actual){
-		if ( clave.length() == 0 ){
+		if ( clave.equals("") ){
 			actual.val = valor;
 		} else {
 			Character digito_actual = clave.charAt(0);
@@ -53,7 +54,6 @@ public class TrieChar<V> {
 	private V obtener(String clave, Nodo<V> actual){
 		if( clave.equals("") )
 			return actual.val;
-		
 		Character digito_actual = clave.charAt(0);
 		return obtener( clave.substring(1, clave.length()), actual.hijo( alf.indice(digito_actual) ));
 		
@@ -64,7 +64,33 @@ public class TrieChar<V> {
 	 * empiezan por un determinado prefijo.
 	 */
 	public List<V> busqueda(String prefijo) {
-		return null;
+		
+		List<V> ret = new ArrayList<V>();
+		boolean existePrefijo = false;
+		
+		for( String clave:claves )
+			existePrefijo = existePrefijo || clave.contains(prefijo);
+		
+		if( !existePrefijo )
+			return ret;
+		
+		Nodo<V> nivel = raiz;
+		for(char caracter:prefijo.toCharArray())
+			nivel = nivel.hijo( alf.indice(caracter) );
+		
+		busqueda(nivel, ret);
+		
+		return ret;
+	}
+	
+	private void busqueda(Nodo<V> nodo, List<V> lista){
+		 
+		if(nodo.val != null)
+			lista.add( nodo.val );
+		
+		for( int i=0; i<alf.tam(); i++ ) if ( nodo.hijo(i) != null )
+			busqueda(nodo.hijo(i), lista);
+		
 	}
 
 	@Override
@@ -76,6 +102,7 @@ public class TrieChar<V> {
 		if( !(o instanceof TrieChar) )
 			return false;
 			
+		@SuppressWarnings("unchecked")
 		TrieChar<V> t2 = (TrieChar<V>) o;
 		
 		if( !this.alf.equals( t2.alf ) )
@@ -90,5 +117,13 @@ public class TrieChar<V> {
 		return true;
 		
 	}
+	
+	@Override
+	public String toString(){
+		//TODO: Implementar!
+		String ret = "";
+		return ret;
+	}
+	
 	
 }
