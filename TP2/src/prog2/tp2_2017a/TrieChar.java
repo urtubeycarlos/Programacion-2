@@ -89,8 +89,9 @@ public class TrieChar<V> {
 				busqueda(prefijo.substring(1, prefijo.length()), hijo, lista);
 			
 		}
+		
 	}
-
+	
 	@Override
 	public boolean equals(Object o){
 
