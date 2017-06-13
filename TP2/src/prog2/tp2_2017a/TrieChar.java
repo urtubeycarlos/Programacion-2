@@ -69,7 +69,7 @@ public class TrieChar<V> {
 		boolean existePrefijo = false;
 		
 		for( String clave:claves )
-			existePrefijo = existePrefijo || clave.contains(prefijo);
+			existePrefijo = existePrefijo || clave.substring(0, prefijo.length()).equals(prefijo);
 		
 		if( !existePrefijo )
 			return ret;
