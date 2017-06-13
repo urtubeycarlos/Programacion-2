@@ -66,36 +66,13 @@ public class TrieChar<V> {
 	public List<V> busqueda(String prefijo) {
 		
 		List<V> ret = new ArrayList<V>();
-//		boolean existePrefijo = false;
-//		
-//		for( String clave:claves )
-//			existePrefijo = existePrefijo || clave.substring(0, prefijo.length()).equals(prefijo);
-//		
-//		if( !existePrefijo )
-//			return ret;
-//		
-//		Nodo<V> nivel = raiz;
-//		for(char caracter:prefijo.toCharArray())
-//			nivel = nivel.hijo( alf.indice(caracter) );
-//		
-//		busqueda(nivel, ret);
-		
 		busqueda(prefijo, raiz, ret);
-		
 		return ret;
-	}
-	
-	private void busqueda(Nodo<V> nodo, List<V> lista){
-		 
-		if(nodo.val != null)
-			lista.add( nodo.val );
-		
-		for( int i=0; i<alf.tam(); i++ ) if ( nodo.hijo(i) != null )
-			busqueda(nodo.hijo(i), lista);
 		
 	}
-	
+
 	private void busqueda(String prefijo, Nodo<V> nodo, List<V> lista){
+		
 		if( prefijo.equals("") ){
 			
 			if(nodo.val != null)
