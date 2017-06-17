@@ -41,7 +41,6 @@ public class TrieChar<V> {
 		}
 	}
 	
-	
 	/**
 	 * Devuelve el valor asociado a una clave, o null si no existe.
 	 */
@@ -56,7 +55,6 @@ public class TrieChar<V> {
 			return actual.val;
 		Character digito_actual = clave.charAt(0);
 		return obtener( clave.substring(1, clave.length()), actual.hijo( alf.indice(digito_actual) ));
-		
 	}
 
 	/**
