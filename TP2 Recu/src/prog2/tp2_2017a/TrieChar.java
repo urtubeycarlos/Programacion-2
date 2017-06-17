@@ -42,6 +42,30 @@ public class TrieChar<V> {
 	}
 	
 	
+	public void eliminar(String clave){
+		if( claves.contains(clave) ){
+			claves.remove(clave);
+			agregar(clave, null, raiz);
+		}
+	}
+	
+//	Alternativo	
+//	
+//	public void eliminar(String clave){
+//		if( clave.contains(clave) ){
+//			claves.remove(clave);
+//			eliminar(clave, raiz);
+//		}
+//	}
+//	
+//	public void eliminar(String clave, Nodo<V> nodo){
+//		if( clave.equals("") )
+//			nodo.val = null;
+//		else
+//			eliminar(clave.substring(1), nodo.hijo( alf.indice(clave.charAt(0)) ));
+//	}
+	
+	
 	/**
 	 * Devuelve el valor asociado a una clave, o null si no existe.
 	 */
@@ -54,9 +78,7 @@ public class TrieChar<V> {
 	private V obtener(String clave, Nodo<V> actual){
 		if( clave.equals("") )
 			return actual.val;
-		Character digito_actual = clave.charAt(0);
-		return obtener( clave.substring(1, clave.length()), actual.hijo( alf.indice(digito_actual) ));
-		
+		return obtener( clave.substring(1), actual.hijo( alf.indice(clave.charAt(0)) ));
 	}
 
 	/**
@@ -83,10 +105,9 @@ public class TrieChar<V> {
 			
 		} else {
 			
-			int indice = alf.indice( prefijo.charAt(0) );
-			Nodo<V> hijo = nodo.hijo(indice);
+			Nodo<V> hijo = nodo.hijo( alf.indice(prefijo.charAt(0)) );
 			if( hijo != null )
-				busqueda(prefijo.substring(1, prefijo.length()), hijo, lista);
+				busqueda(prefijo.substring(1), hijo, lista);
 			
 		}
 		
