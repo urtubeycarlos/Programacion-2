@@ -44,8 +44,8 @@ public class TrieChar<V> {
 	
 	public void eliminar(String clave){
 		if( claves.contains(clave) ){
-			claves.remove(clave);
 			agregar(clave, null, raiz);
+			claves.remove(clave);
 		}
 	}
 	
@@ -53,8 +53,8 @@ public class TrieChar<V> {
 //	
 //	public void eliminar(String clave){
 //		if( clave.contains(clave) ){
-//			claves.remove(clave);
 //			eliminar(clave, raiz);
+//			claves.remove(clave);
 //		}
 //	}
 //	
