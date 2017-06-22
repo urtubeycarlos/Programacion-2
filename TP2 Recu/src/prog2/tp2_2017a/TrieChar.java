@@ -58,11 +58,11 @@ public class TrieChar<V> {
 //		}
 //	}
 //	
-//	public void eliminar(String clave, Nodo<V> nodo){
+//	public void eliminar(String clave, Nodo<V> actual){
 //		if( clave.equals("") )
-//			nodo.val = null;
+//			actual.val = null;
 //		else
-//			eliminar(clave.substring(1), nodo.hijo( alf.indice(clave.charAt(0)) ));
+//			eliminar(clave.substring(1), actual.hijo( alf.indice(clave.charAt(0)) ));
 //	}
 	
 	
