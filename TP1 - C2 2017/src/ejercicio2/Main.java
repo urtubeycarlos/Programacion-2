@@ -7,13 +7,12 @@ public class Main {
 		JuegoSillas js = new JuegoSillas(4);
 		js.asignarPersonas();
 		
-		
-		while( js.cantidadSillasActivas() > 0 ){
-			
-			js.jugar();
+		while( js.cantSillasActivas() > 0 ){
 			System.out.println( js );
-			
+			js.jugar();
 		}
+		
+		System.out.println( js );
 		
 	}
 
