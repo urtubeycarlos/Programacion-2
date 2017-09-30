@@ -46,11 +46,22 @@ public class ConjLazyTest {
 		
 	}
 	
+	//FIXME: Revisar test.
 	@Test
 	public void interseccionTest(){
 		
+		// c1 = [A, B, C]
+		// c2 = [C, D, E]
+		// c3 = [B, F]
 		c1.interseccion(c2);
+		// c1 intersec c2 = C
 		c1.interseccion(c3);
+		// c1 = [C]
+		// c3 = [B, F]
+		// c1 intersec c3 = []
+		
+		//¿Está bien el test?
+		
 		assertTrue( c1.pertenece("C") );
 		assertTrue( c1.pertenece("B") );
 		assertEquals(2, c1.tamaño());
