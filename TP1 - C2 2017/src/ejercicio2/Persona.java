@@ -1,7 +1,9 @@
 package ejercicio2;
 
 public class Persona {
+	
 	private int _id;
+	
 	Persona(int id){
 		this._id = id;
 	}

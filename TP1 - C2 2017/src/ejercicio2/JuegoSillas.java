@@ -11,12 +11,14 @@ public class JuegoSillas {
 	private int cant_personas_Max, cant_sillas, cant_personas_min;
 	
 	JuegoSillas(int sillas){
+		
 		this.cant_sillas = sillas;
 		this.cant_personas_min = sillas;
 		this.cant_personas_Max = sillas*2+6;
 		random = new Random();
 		this._tablero = new Tablero(this.cant_sillas);
-		}
+		
+	}
 	
 	public void asignarPersonas(){
 		
@@ -79,21 +81,25 @@ public class JuegoSillas {
 	}
 	
 	private LinkedList<Tupla> generarPosiblesPosiciones(){
+		
 		LinkedList<Tupla> ret = new LinkedList<Tupla>();
 		for( int i=0; i<3; i++)
 		for( int j=0; j<_tablero.sillasRestantes()+2; j++)
 			ret.add( new Tupla(i, j) );
 		ret.removeIf( t -> (t.x == 1 && t.y > 0 && t.y<_tablero.sillasRestantes()+1) );
 		return ret;
+		
 	}
 	
 	@Override
 	public String toString(){
+		
 		if( _tablero.cantPersonas() == 1 )
 			return "Ganador: " + _tablero.getPersonas();
-		if( _tablero.sillasRestantes()>=1 && _tablero.cantPersonas()==0 )
+		if( _tablero.sillasRestantes() >=1 && _tablero.cantPersonas() == 0 )
 			return "No hay ganador";
 		return _tablero.toString();
+		
 	}
 	
 }

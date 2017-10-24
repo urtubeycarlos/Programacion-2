@@ -8,9 +8,11 @@ public class Tablero {
 	private Persona[][] _matrizPosiciones;
 	
 	Tablero(int cantSillas){
+		
 		this._matrizPosiciones = new Persona[3][cantSillas+2];
 		for( Persona[] fila:_matrizPosiciones )//
 			Arrays.fill(fila, null);
+		
 	}
 	
 	public void setPersona(int x, int y, Persona p){
@@ -18,12 +20,14 @@ public class Tablero {
 	}
 	
 	public LinkedList<Persona> getPersonas(){
+		
 		LinkedList<Persona> ret = new LinkedList<Persona>();
 		for( Persona[] fila:_matrizPosiciones )
 		for( Persona p:fila )
 			if( p != null )
 				ret.add(p);
 		return ret;
+		
 	}
 	
 	public int cantPersonas(){
