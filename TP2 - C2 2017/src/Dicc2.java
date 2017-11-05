@@ -19,6 +19,7 @@ public class Dicc2<C, S> implements Dicc<C, S> {
 	
 	@Override
 	public S obtener(C clave) {
+		checkearEntrada(clave, "clave");
 		for( Tupla<C, S> t:_diccionario )
 			if( t.e1.equals(clave) )
 				return t.e2;
@@ -27,12 +28,21 @@ public class Dicc2<C, S> implements Dicc<C, S> {
 
 	@Override
 	public void definir(C clave, S significado) {
+		checkearEntrada(clave, "clave");
+		checkearEntrada(significado, "significado");
 		eliminar(clave);
 		_diccionario.add( new TuplaDicc<C, S>(clave, significado) );
+	}
+	
+	@Override
+	public void eliminar(C clave) {
+		checkearEntrada(clave, "clave");
+		_diccionario.removeIf( t -> t.e1.equals(clave) );
 	}
 
 	@Override
 	public boolean pertenece(C clave) {
+		checkearEntrada(clave, "clave");
 		for( Tupla<C, S> t:_diccionario )
 			if( t.e1.equals(clave) )
 				return true;
@@ -47,10 +57,10 @@ public class Dicc2<C, S> implements Dicc<C, S> {
 					return true;
 		return false;
 	}
-
-	@Override
-	public void eliminar(C clave) {
-		_diccionario.removeIf( t -> t.e1.equals(clave) );
+	
+	private void checkearEntrada(Object entrada, String tipo) {
+		if( entrada == null )
+			throw new IllegalArgumentException(tipo + " no puede ser null");
 	}
 
 	@Override

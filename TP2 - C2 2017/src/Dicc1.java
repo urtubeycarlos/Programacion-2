@@ -26,6 +26,7 @@ public class Dicc1<C, S> implements Dicc<C, S> {
 	
 	@Override
 	public S obtener(C clave) {
+		checkearEntrada(clave, "clave");
 		for( TuplaDicc<C, S> t:_diccionario )
 			if( t.e1.equals(clave) )
 				return t.e2;
@@ -34,12 +35,22 @@ public class Dicc1<C, S> implements Dicc<C, S> {
 
 	@Override
 	public void definir(C clave, S significado) {
+		checkearEntrada(clave, "clave");
+		checkearEntrada(significado, "significado");
 		eliminar(clave);
 		_diccionario.add( new TuplaDicc<C, S>(clave, significado) );
 	}
 
+
+	@Override
+	public void eliminar(C clave) {
+		checkearEntrada(clave, "clave");
+		_diccionario.removeIf( t -> t.e1.equals(clave) );
+	}
+	
 	@Override
 	public boolean pertenece(C clave) {
+		checkearEntrada(clave, "clave");
 		return _diccionario.contains( new TuplaDicc<C, S>(clave, null) );
 	}
 	
@@ -50,10 +61,10 @@ public class Dicc1<C, S> implements Dicc<C, S> {
 					return true;
 		return false;
 	}
-
-	@Override
-	public void eliminar(C clave) {
-		_diccionario.removeIf( t -> t.e1.equals(clave) );
+	
+	private void checkearEntrada(Object entrada, String tipo) {
+		if( entrada == null )
+			throw new IllegalArgumentException(tipo + " no puede ser null");
 	}
 
 	@Override
@@ -66,10 +77,13 @@ public class Dicc1<C, S> implements Dicc<C, S> {
 	@Override
 	public boolean equals(Object o){
 		
-		boolean ret = true;
+		if( o == null )
+			return false;
 		
 		if( !(o instanceof Dicc) )
-			ret = false;
+			return false;
+		
+		boolean ret = true;
 		
 		@SuppressWarnings("unchecked")
 		Dicc<C, S> d2 = ( Dicc<C, S> ) o;
@@ -95,7 +109,6 @@ public class Dicc1<C, S> implements Dicc<C, S> {
 		dic1.definir(1, "cuatro");
 		dic1.definir(1, "uno");
 		dic1.definir(2, "dos");
-		System.out.println( dic1 );
 		
 	}
 }
