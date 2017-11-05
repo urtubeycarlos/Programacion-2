@@ -102,13 +102,4 @@ public class Dicc1<C, S> implements Dicc<C, S> {
 		return _diccionario.toString();
 	}
 	
-	public static void main(String[] args){
-		
-		Dicc1<Integer, String> dic1 = new Dicc1<>();
-		
-		dic1.definir(1, "cuatro");
-		dic1.definir(1, "uno");
-		dic1.definir(2, "dos");
-		
-	}
 }
